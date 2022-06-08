@@ -103,10 +103,6 @@ static std::string encode_mime(String s) {
   return encode_with_line_breaks<String, 76>(s);
 }
 
-template <typename String>
-static std::string encode(String s, bool url) {
-  return base64_encode(reinterpret_cast<const unsigned char*>(s.data()), s.length(), url);
-}
 
 std::string base64_encode(unsigned char const* bytes_to_encode, size_t in_len, bool url) {
 
@@ -244,11 +240,10 @@ std::string base64_decode(std::string const& s, bool remove_linebreaks) {
    return decode(s, remove_linebreaks);
 }
 
-//
-// Interface with std::string_view rather than const std::string&
-// Requires C++17
-// Provided by Yannic Bonenberger (https://github.com/Yannic)
-//
+template <typename String>
+static std::string encode(String s, bool url) {
+    return base64_encode(reinterpret_cast<const unsigned char*>(s.data()), s.length(), url);
+}
 
 std::string base64_encode(std::string_view s, bool url) {
    return encode(s, url);
