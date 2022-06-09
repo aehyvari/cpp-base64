@@ -24,6 +24,7 @@ set_target_properties(base64 PROPERTIES
     OUTPUT_NAME base64
     PUBLIC_HEADER base64.h
 )
+target_include_directories(base64 INTERFACE ${CMAKE_SOURCE_DIR})
 
 include(GNUInstallDirs)
 
