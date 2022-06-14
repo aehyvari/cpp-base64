@@ -9,6 +9,12 @@
 #include <string>
 
 #include <string_view>
+class Base64Exception : public std::exception {
+    std::string why;
+public:
+    explicit Base64Exception(std::string && why) : why(std::move(why)) {}
+    const char * what() const noexcept override { return why.c_str(); }
+};
 
 //
 // Interface with std::string_view rather than const std::string&
