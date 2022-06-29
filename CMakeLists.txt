@@ -42,7 +42,7 @@ install(TARGETS base64
         PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
 
-install(FILES base64.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/base64.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 include(CMakePackageConfigHelpers)
 
@@ -68,7 +68,8 @@ write_basic_package_version_file(
         COMPATIBILITY AnyNewerVersion
 )
 
-export(EXPORT Base64Targets
-        FILE "${CMAKE_CURRENT_BINARY_DIR}/cmake/Base64Targets.cmake"
+install(EXPORT Base64Targets
+        FILE "Base64Targets.cmake"
         NAMESPACE Base64::
+        DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/base64"
 )
